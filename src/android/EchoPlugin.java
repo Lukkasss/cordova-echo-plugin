@@ -10,7 +10,7 @@ public class EchoPlugin extends CordovaPlugin {
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
 	Log.d("EchoPlugin", "action: " + action);
-	Log.d("EchoPlugin", "callbackcontext: " + CallbackContext);
+	Log.d("EchoPlugin", "callbackcontext: " + callbackContext);
         if ("echo".equals(action)) {
             String message = args.getString(0);
 	    Log.d("EchoPlugin", "message received: " + message);
