@@ -5,6 +5,7 @@ import org.apache.cordova.CallbackContext;
 import org.json.JSONArray;
 import org.json.JSONException;
 import android.util.Log;
+import android.webkit.WebView;
 
 public class EchoPlugin extends CordovaPlugin {
     @Override
@@ -34,7 +35,8 @@ public class EchoPlugin extends CordovaPlugin {
         cordova.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                webView.evaluateJavascript(jsCode, null);
+		WebView actualWebView = (WebView) webView.getEngine().getView();
+            	actualWebView.evaluateJavascript(jsCode, null);
             }
         });
     }
