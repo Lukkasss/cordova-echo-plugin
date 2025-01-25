@@ -29,11 +29,12 @@ public class EchoPlugin extends CordovaPlugin {
     }
 
     private void updateHtmlElement(String elementId, String message) {
-        webView.getView().post(new Runnable() {
+        // Usa evaluateJavascript para executar código JS diretamente no WebView
+        final String jsCode = "document.getElementById('" + elementId + "').innerText = '" + escapeJavaScriptString(message) + "';";
+        cordova.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                String jsCode = "document.getElementById('" + elementId + "').innerText = '" + escapeJavaScriptString(message) + "';";
-                webView.loadUrl("javascript:" + jsCode);
+                webView.evaluateJavascript(jsCode, null);
             }
         });
     }
