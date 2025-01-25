@@ -1,0 +1,19 @@
+{
+    "name": "com.example.echo",
+    "version": "1.0.0",
+    "description": "Um simples plugin de echo para Cordova",
+    "cordova": {
+        "id": "com.example.echo",
+        "platforms": [
+            "android",
+            "ios"
+        ]
+    },
+    "keywords": [
+        "cordova",
+        "echo",
+        "plugin"
+    ],
+    "author": "Seu Nome",
+    "license": "MIT"
+}

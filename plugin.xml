@@ -1,0 +1,14 @@
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        id="com.example.echo"
+        version="1.0.0">
+    <name>EchoPlugin</name>
+    <js-module src="www/Echo.js" name="Echo">
+        <clobbers target="window.echo" />
+    </js-module>
+    <platform name="android">
+        <source-file src="src/android/EchoPlugin.java" target-dir="src/com/example/echo" />
+    </platform>
+    <platform name="ios">
+        <source-file src="src/ios/EchoPlugin.m" />
+    </platform>
+</plugin>
