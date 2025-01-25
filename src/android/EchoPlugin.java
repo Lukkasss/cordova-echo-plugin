@@ -12,11 +12,30 @@ public class EchoPlugin extends CordovaPlugin {
 	Log.d("EchoPlugin", "action: " + action);
 	Log.d("EchoPlugin", "callbackcontext: " + callbackContext);
         if ("echo".equals(action)) {
-            String message = args.getString(0);
-	    Log.d("EchoPlugin", "message received: " + message);
-            callbackContext.success(message); // Retorna a mensagem recebida
+	    String elementId = args.getString(0);
+            String message = args.getString(1);
+	    if (elementId != null && !elementId.isEmpty() && message != null && !message.isEmpty()) {
+                // Atualiza o elemento HTML com a mensagem
+                updateHtmlElement(elementId, message);
+
+                // Retorna a mensagem para o JavaScript
+                callbackContext.success(message);
+            } else {
+                callbackContext.error("ID do elemento ou mensagem inválidos.");
+            }
             return true;
         }
         return false;
+    }
+
+    private void updateHtmlElement(String elementId, String message) {
+        // Executa um código JavaScript no WebView para atualizar o elemento HTML com a mensagem
+        final String jsCode = "javascript:document.getElementById('" + elementId + "').innerText = '" + escapeJavaScriptString(message) + "';";
+        webView.loadUrl(jsCode); // Executa o JS no WebView
+    }
+
+    private String escapeJavaScriptString(String input) {
+        // Escapa caracteres especiais para evitar problemas no código JavaScript
+        return input.replace("'", "\\'").replace("\n", "\\n").replace("\r", "\\r");
     }
 }
