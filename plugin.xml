@@ -7,6 +7,11 @@
     </js-module>
     <platform name="android">
         <source-file src="src/android/EchoPlugin.java" target-dir="src/com/example/echo" />
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <feature name="EchoPlugin">
+                <param name="android-package" value="com.example.echo.EchoPlugin" />
+            </feature>
+        </config-file>
     </platform>
     <platform name="ios">
         <source-file src="src/ios/EchoPlugin.m" />
