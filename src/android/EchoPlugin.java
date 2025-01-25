@@ -29,9 +29,13 @@ public class EchoPlugin extends CordovaPlugin {
     }
 
     private void updateHtmlElement(String elementId, String message) {
-        // Executa um código JavaScript no WebView para atualizar o elemento HTML com a mensagem
-        final String jsCode = "javascript:document.getElementById('" + elementId + "').innerText = '" + escapeJavaScriptString(message) + "';";
-        webView.loadUrl(jsCode); // Executa o JS no WebView
+        webView.getView().post(new Runnable() {
+            @Override
+            public void run() {
+                String jsCode = "document.getElementById('" + elementId + "').innerText = '" + escapeJavaScriptString(message) + "';";
+                webView.loadUrl("javascript:" + jsCode);
+            }
+        });
     }
 
     private String escapeJavaScriptString(String input) {
